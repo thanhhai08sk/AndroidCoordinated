@@ -3,6 +3,7 @@ package io.hainguyen.androidcoordinated.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
@@ -23,7 +24,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
-
+import io.hainguyen.androidcoordinated.android.Permission
 
 
 /**
@@ -81,6 +82,9 @@ fun Activity.showKeyboard(editText: EditText) {
 fun setViewsGone(vararg views: View) {
     views.forEach { it.gone() }
 }
+
+fun Context.hasPermission(permission: Permission): Boolean =
+        ActivityCompat.checkSelfPermission(this, permission.permissionString) == PackageManager.PERMISSION_GRANTED
 
 fun setViewsVisible(vararg views: View) {
     views.forEach { it.visible() }

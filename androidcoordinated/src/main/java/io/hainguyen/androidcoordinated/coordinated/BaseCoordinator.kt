@@ -2,14 +2,11 @@ package org.de_studio.diary.base.architecture
 
 import android.support.annotation.CallSuper
 import com.jakewharton.rxrelay2.PublishRelay
+import io.hainguyen.androidcoordinated.coordinated.EmissionDeferer
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.realm.Realm
 import org.de_studio.diary.android.Schedulers
-import org.de_studio.diary.android.crashReporter.CrashReporter
-import org.de_studio.diary.business.JustResult
-import org.de_studio.diary.utils.EmissionDeferer
 import timber.log.Timber
 
 /**
@@ -20,7 +17,6 @@ abstract class BaseCoordinator< M : ViewState, EV: Event, out T: ActionComposer,
         val actionComposer: T,
         val eventComposer: E,
         val resultComposer: ResultComposer,
-        val realm: Realm,
         val schedulers: Schedulers
 ) {
     private val onEvent = PublishRelay.create<EV>()
@@ -59,7 +55,6 @@ abstract class BaseCoordinator< M : ViewState, EV: Event, out T: ActionComposer,
         onAction
                 .observeOn(schedulers.ios)
                 .doOnNext { Timber.e("${this.javaClass.simpleName}: onAction: ${it::class.java.simpleName} ${if (it is JustResult) it.result.javaClass.simpleName else ""}") }
-                .doOnNext { CrashReporter.log("Perform action: \"${this.javaClass.simpleName}: onAction: ${it::class.java.simpleName} ${if (it is JustResult) it.result.javaClass.simpleName else ""}\"") }
                 .compose(actionComposer.getComposer())
                 .observeOn(schedulers.main)
                 .subscribe { onResult.accept(it) }
@@ -70,10 +65,8 @@ abstract class BaseCoordinator< M : ViewState, EV: Event, out T: ActionComposer,
                 .doOnNext {
                     if (it is ErrorResult) {
                         Timber.e("${this.javaClass.simpleName}: get result error: ${it.javaClass.name} , error = ${it.error}")
-                        CrashReporter.log("${this.javaClass.simpleName}: get result error: ${it.javaClass.name} , error = ${it.error}")
                     } else {
                         Timber.e("${this.javaClass.simpleName}: get result: ${it.javaClass.name} ")
-                        CrashReporter.log("${this.javaClass.simpleName}: get result: ${it.javaClass.name} ")
                     }
                 }
                 .compose(resultComposer.getComposer())
@@ -99,13 +92,11 @@ abstract class BaseCoordinator< M : ViewState, EV: Event, out T: ActionComposer,
             onAction
 
     @CallSuper open fun unbindViewController() {
-        Timber.e("${this.javaClass.simpleName}: DetachView")
         resultDeferer.stopEmission()
         onDetachDisposable.clear()
     }
 
     @CallSuper open fun destroy() {
-        Timber.e("${this.javaClass.simpleName}: Destroy")
         onDetachDisposable.clear()
         onDestroyDisposable.clear()
     }

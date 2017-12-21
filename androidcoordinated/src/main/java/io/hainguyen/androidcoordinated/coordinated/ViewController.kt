@@ -1,7 +1,7 @@
 package org.de_studio.diary.base.architecture
 
+import io.hainguyen.androidcoordinated.coordinated.ViewsProvider
 import io.reactivex.Observable
-import org.de_studio.diary.screen.base.ViewsProvider
 
 /**
  * Created by HaiNguyen on 11/30/16.

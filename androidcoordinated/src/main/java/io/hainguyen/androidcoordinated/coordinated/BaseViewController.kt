@@ -1,7 +1,7 @@
 package org.de_studio.diary.base.architecture
 
+import io.hainguyen.androidcoordinated.coordinated.ViewsProvider
 import io.reactivex.disposables.Disposable
-import org.de_studio.diary.screen.base.ViewsProvider
 import java.lang.ref.WeakReference
 
 /**

@@ -1,8 +1,8 @@
 package org.de_studio.diary.base.architecture
 
+import io.hainguyen.androidcoordinated.utils.publishMerge
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
-import org.de_studio.diary.utils.extensionFunction.publishMerge
 
 /**
  * Created by HaiNguyen on 8/27/17.

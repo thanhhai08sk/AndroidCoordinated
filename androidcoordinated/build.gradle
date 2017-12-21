@@ -46,6 +46,14 @@ dependencies {
 
     api 'com.android.support:recyclerview-v7:26.1.0'
 
+    //Butter Knife
+    api 'com.jakewharton:butterknife:8.6.0'
+    kapt 'com.jakewharton:butterknife-compiler:8.6.0'
+    api 'com.jakewharton:butterknife:8.6.0'
+
+    //Timber
+    api 'com.jakewharton.timber:timber:4.5.1'
+
 
 }
 repositories {

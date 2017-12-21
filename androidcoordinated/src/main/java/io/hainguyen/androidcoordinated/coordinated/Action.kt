@@ -16,3 +16,6 @@ object DoNothingUseCase : UseCase() {
         return Observable.empty()
     }
 }
+class JustResult(val result: Result) : UseCase() {
+    override fun execute(): Observable<Result> = Observable.just(result)
+}

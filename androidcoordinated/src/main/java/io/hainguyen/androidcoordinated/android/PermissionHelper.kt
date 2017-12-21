@@ -1,10 +1,10 @@
-package org.de_studio.diary.android
+package io.hainguyen.androidcoordinated.android
 
 import android.Manifest
 import android.content.Context
 import com.jakewharton.rxrelay2.PublishRelay
+import io.hainguyen.androidcoordinated.utils.hasPermission
 import io.reactivex.Single
-import org.de_studio.diary.utils.extensionFunction.hasPermission
 
 /**
  * Created by HaiNguyen on 9/9/17.

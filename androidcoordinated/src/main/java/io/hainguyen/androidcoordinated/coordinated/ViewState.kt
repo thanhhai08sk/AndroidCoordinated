@@ -1,8 +1,7 @@
 package org.de_studio.diary.base.architecture
 
 import android.support.annotation.CallSuper
-import org.de_studio.diary.screen.action.ViewsInstantState
-import timber.log.Timber
+import io.hainguyen.androidcoordinated.coordinated.ViewsInstantState
 
 /**
  * Created by HaiNguyen on 8/24/17.
@@ -24,7 +23,6 @@ open class ViewState(
     }
 
     fun handleError(error: Throwable): ViewState {
-        Timber.e("handleError: $error")
         this.error = error
         handleError = true
         return this
@@ -36,13 +34,11 @@ open class ViewState(
     }
 
     open fun finishView(): ViewState {
-        Timber.e("finishView finished")
         finished = true
         return this
     }
 
     fun storeViewsInstantState(state: ViewsInstantState): ViewState {
-        Timber.e("storeViewsInstantState $state")
         viewsState = state
         return this
     }

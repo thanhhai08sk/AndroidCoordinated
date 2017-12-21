@@ -3,11 +3,11 @@ package org.de_studio.diary.base.architecture
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.jakewharton.rxrelay2.PublishRelay
+import io.hainguyen.androidcoordinated.coordinated.EmissionDeferer
+import io.hainguyen.androidcoordinated.coordinated.ViewsProvider
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import org.de_studio.diary.screen.base.ViewsProvider
-import org.de_studio.diary.utils.EmissionDeferer
 import java.lang.ref.WeakReference
 
 /**
