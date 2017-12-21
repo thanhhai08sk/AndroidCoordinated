@@ -4,12 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
 import com.jakewharton.rxrelay2.PublishRelay
+import io.hainguyen.androidcoordinated.utils.inflateView
+import io.hainguyen.androidcoordinated.utils.onClick
+import io.hainguyen.androidcoordinated.utils.onLongClick
 import io.reactivex.Observable
-import org.de_studio.diary.R
-import org.de_studio.diary.screen.base.EntriesContainer
-import org.de_studio.diary.utils.extensionFunction.*
+
 
 
 /**
@@ -60,17 +60,5 @@ class HeaderViewHolder(container: FrameLayout) : BaseViewHolder<Any>(container, 
             (item.view.parent as ViewGroup).removeView(item.view)
         }
         itemView.addView(item.view)
-    }
-}
-
-open class SimpleEntriesContainerViewHolder<T : EntriesContainer>(itemView: View) : BaseViewHolder<T>(itemView, true, true) {
-    val titleText: TextView = itemView.find(R.id.title)
-    val entriesSize: TextView = itemView.find(R.id.entries_size)
-    override fun bindItemData(item: AdapterItem<T>) {
-        titleText.visible()
-        item.itemData?.apply {
-            titleText.text = this.title
-            entriesSize.text = context.getString(R.string.entries_count).format(this.entriesCount)
-        }
     }
 }
